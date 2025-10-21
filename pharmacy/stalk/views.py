@@ -14,6 +14,7 @@ def add_medicine(request):
         stock_quantity = request.POST['stock_quantity']
         expiration_date = request.POST['expiration_date']
         category_id = request.POST.get('category_id')
+        image = request.FILES.get('image')
     
         category = Category.objects.get(id=category_id) if category_id else None
         
@@ -40,6 +41,10 @@ def update_medicine(request, medicine_id):
         medicine.price = request.POST['price']
         medicine.stock_quantity = request.POST['stock_quantity']
         medicine.expiration_date = request.POST['expiration_date']
+        
+        if 'image' in request.FILES:
+            medicine.image = request.FILES['image']
+            
         medicine.save()
         messages.success(request, "Updated medicine successfully!")
         return redirect('medicine_list')
@@ -53,3 +58,8 @@ def delete_medicine(request, medicine_id):
         messages.success(request, "Deleted medicine successfully!")
         return redirect('medicine_list')
     return render(request, 'stalk/delete_medicine.html', {'medicine': medicine})
+
+# privies images
+def preview_medicine(request, pk):
+    medicine = get_object_or_404(Medicine, pk=pk)
+    return render(request, 'preview_medicine.html', {'medicine': medicine})

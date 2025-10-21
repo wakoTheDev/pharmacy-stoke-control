@@ -15,7 +15,8 @@ class Medicine(models.Model):
     manufacturer = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock_quantity = models.PositiveIntegerField()
-    expiration_date = models.DateField()
+    expiry_date = models.DateField()
+    image = models.ImageField(upload_to='medicine_images/', blank=True, null=True)
     date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

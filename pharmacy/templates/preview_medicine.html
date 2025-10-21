@@ -1,0 +1,18 @@
+<h2>Medicine Preview</h2>
+
+<p><strong>Name:</strong> {{ medicine.name }}</p>
+<p><strong>Manufacturer:</strong> {{ medicine.manufacturer }}</p>
+<p><strong>Quantity:</strong> {{ medicine.stock_quantity }}</p>
+<p><strong>Price:</strong> {{ medicine.price }}</p>
+<p><strong>Expiry Date:</strong> {{ medicine.expiry_date }}</p>
+<p><strong>Category:</strong> {{ medicine.category.name }}</p>
+
+{% if medicine.image %}
+  <p><strong>Product Image:</strong></p>
+  <img src="{{ medicine.image.url }}" alt="{{ medicine.name }}" width="200">
+{% else %}
+  <p><em>No image available.</em></p>
+{% endif %}
+
+<br>
+<a href="{% url 'medicine_list' %}">Back to list</a>

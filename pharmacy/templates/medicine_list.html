@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h2>Pharmacy Stock Control</h2>
+        <a href="{% url 'add_medicine' %}">Add Medicine</a>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>manufucturer</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>expiry</th>
+                <th>Actions</th>
+            </tr>
+            {% for m in medicines %}
+            <tr>
+                <td>{{ m.name }}</td>
+                <td>{{ m.manufacturer }}</td>
+                <td>{{ m.stock_quantity }}</td>
+                <td>{{ m.price }}</td>
+                <td>{{ m.expiry_date }}</td>
+                <td>{{ m.date_added }}</td>
+                <td>
+                    <a href="{% url 'update_medicine' m.id %}">Edit</a>
+                    <a href="{% url 'delete_medicine' m.id %}">Delete</a>
+                     <a href="{% url 'preview_medicine' m.id %}">Preview</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
