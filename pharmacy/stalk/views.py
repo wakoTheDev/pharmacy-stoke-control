@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib import messages
 
-from pharmacy.stalk.models import Category, Medicine
+from .models import Category, Medicine
 
 # Create your views here.
 # adds a new medicine in the stock
@@ -23,12 +23,12 @@ def add_medicine(request):
         messages.success(request, "Added medicine successfully!")
         
         return redirect('medicine_list')
-    return render(request, 'stalk/add_medicine.html', {'categories': Category.objects.all()})
+    return render(request, 'add_medicine.html', {'categories': Category.objects.all()})
 
 # returns all  the medicine available in stock
 def medicine_list(request):
     medicines = Medicine.objects.all()
-    return render(request, 'stalk/medicine_list.html', {'medicines': medicines})
+    return render(request, 'medicine_list.html', {'medicines': medicines})
 
 # updates the details of a medicine in stock
 def update_medicine(request, medicine_id):
@@ -48,7 +48,7 @@ def update_medicine(request, medicine_id):
         medicine.save()
         messages.success(request, "Updated medicine successfully!")
         return redirect('medicine_list')
-    return render(request, 'stalk/update_medicine.html', {'medicine': medicine, 'categories': Category.objects.all()})
+    return render(request, 'update_medicine.html', {'medicine': medicine, 'categories': Category.objects.all()})
 
 # deletes a medicine from the stock
 def delete_medicine(request, medicine_id):
@@ -57,7 +57,7 @@ def delete_medicine(request, medicine_id):
         medicine.delete()
         messages.success(request, "Deleted medicine successfully!")
         return redirect('medicine_list')
-    return render(request, 'stalk/delete_medicine.html', {'medicine': medicine})
+    return render(request, 'delete_medicine.html', {'medicine': medicine})
 
 # privies images
 def preview_medicine(request, pk):
